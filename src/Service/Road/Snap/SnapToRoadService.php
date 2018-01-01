@@ -6,10 +6,11 @@ namespace Ivory\GoogleMap\Service\Road\Snap;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Ivory\GoogleMap\Service\AbstractSerializableService;
+use Ivory\GoogleMap\Service\AbstractService;
 use Ivory\GoogleMap\Service\Road\Snap\Request\SnapToRoadRequest;
 use Ivory\GoogleMap\Service\Road\Snap\Response\SnapToRoadResponse;
 use Ivory\Serializer\Context\Context;
-use Ivory\Serializer\Naming\SnakeCaseNamingStrategy;
+use Ivory\Serializer\Naming\CamelCaseNamingStrategy;
 use Ivory\Serializer\SerializerInterface;
 
 /**
@@ -36,24 +37,32 @@ class SnapToRoadService extends AbstractSerializableService
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function createBaseUrl($request)
+    {
+        return AbstractService::createBaseUrl($request);
+    }
+
+    /**
      * @param SnapToRoadRequest $request
      *
      * @return SnapToRoadResponse
      * @throws \Exception
      * @throws \Http\Client\Exception
      */
-  public function snapToRoads(SnapToRoadRequest $request) {
-      $httpRequest = $this->createRequest($request);
-      $httpResponse = $this->getClient()->sendRequest($httpRequest);
+    public function snapToRoads(SnapToRoadRequest $request) {
+        $httpRequest = $this->createRequest($request);
+        $httpResponse = $this->getClient()->sendRequest($httpRequest);
 
-      $response = $this->deserialize(
-          $httpResponse,
-          SnapToRoadResponse::class,
-          (new Context())->setNamingStrategy(new SnakeCaseNamingStrategy())
-      );
+        $response = $this->deserialize(
+            $httpResponse,
+            SnapToRoadResponse::class,
+            (new Context())->setNamingStrategy(new CamelCaseNamingStrategy())
+        );
 
-      $response->setRequest($request);
+        $response->setRequest($request);
 
-      return $response;
-  }
+        return $response;
+    }
 }

@@ -3,20 +3,28 @@
 
 namespace Ivory\GoogleMap\Service\Road\Snap\Response;
 
-use Ivory\GoogleMap\Service\Base\SnappedPoint;
+use Ivory\GoogleMap\Service\Road\Base\SnappedPoint;
+use Ivory\GoogleMap\Service\Road\Snap\Request\SnapToRoadRequestInterface;
 
 /**
  * @author fedotovaleksandr <mr.fedotovaleksandr@gmail.com>
  */
 class SnapToRoadResponse
 {
-
+    /**
+     * @var array|SnappedPoint[]
+     */
     private $snappedPoints;
+
+    /**
+     * @var SnapToRoadRequestInterface|null
+     */
+    private $request;
 
     /**
      * @return array|SnappedPoint[]
      */
-    public function getSnappedPoints()
+    public function getSnappedPoints(): array
     {
         return $this->snappedPoints;
     }
@@ -24,8 +32,24 @@ class SnapToRoadResponse
     /**
      * @param array|SnappedPoint[] $snappedPoints
      */
-    public function setSnappedPoints($snappedPoints): void
+    public function setSnappedPoints(array $snappedPoints)
     {
         $this->snappedPoints = $snappedPoints;
+    }
+
+    /**
+     * @return SnapToRoadRequestInterface|null
+     */
+    public function getRequest(): SnapToRoadRequestInterface
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param SnapToRoadRequestInterface|null $request
+     */
+    public function setRequest(SnapToRoadRequestInterface $request): void
+    {
+        $this->request = $request;
     }
 }

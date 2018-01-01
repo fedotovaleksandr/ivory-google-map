@@ -7,24 +7,18 @@
                         http://egeloen.fr/schema/ivory-serializer/mapping-1.0.xsd"
 >
     <class
-        name="Ivory\GoogleMap\Service\Road\Base\SnappedPoint"
+        name="Ivory\GoogleMap\Service\Road\Base\Location"
         exclusion-policy="all"
     >
         <property
-                name="location"
-                type="Ivory\GoogleMap\Service\Road\Base\Location"
-                expose="true"
+            name="latitude"
+            type="float"
+            expose="true"
         />
 
         <property
-                name="originalIndex"
-                type="integer"
-                expose="true"
-        />
-
-        <property
-            name="placeId"
-            type="string"
+            name="longitude"
+            type="float"
             expose="true"
         />
     </class>

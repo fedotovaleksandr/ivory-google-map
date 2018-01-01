@@ -2,15 +2,13 @@
 
 namespace Ivory\GoogleMap\Service\Road\Base;
 
-use Ivory\GoogleMap\Base\Coordinate;
-
 /**
  * @author fedotovaleksandr <mr.fedotovaleksandr@gmail.com>
  */
 class SnappedPoint
 {
     /**
-     * @var Coordinate|null
+     * @var Location
      */
     private $location;
 
@@ -21,17 +19,17 @@ class SnappedPoint
     private $placeId;
 
     /**
-     * @return Coordinate|null
+     * @return Location|null
      */
-    public function getLocation(): ?Coordinate
+    public function getLocation() :Location
     {
         return $this->location;
     }
 
     /**
-     * @param Coordinate|null $location
+     * @param Location $location
      */
-    public function setLocation(?Coordinate $location): void
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -55,7 +53,7 @@ class SnappedPoint
     /**
      * @return string
      */
-    public function getPlaceId(): string
+    public function getPlaceId()
     {
         return $this->placeId;
     }
