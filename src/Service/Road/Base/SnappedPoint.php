@@ -12,7 +12,7 @@ class SnappedPoint
      */
     private $location;
 
-    /** @var integer */
+    /** @var integer|null */
     private $originalIndex;
 
     /** @var string */
@@ -37,7 +37,7 @@ class SnappedPoint
     /**
      * @return int
      */
-    public function getOriginalIndex(): int
+    public function getOriginalIndex(): ?int
     {
         return $this->originalIndex;
     }
@@ -53,7 +53,7 @@ class SnappedPoint
     /**
      * @return string
      */
-    public function getPlaceId()
+    public function getPlaceId(): string
     {
         return $this->placeId;
     }

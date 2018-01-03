@@ -2,15 +2,15 @@
 
 namespace Ivory\GoogleMap\Service\Road\Snap\Request;
 
-use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Service\Road\Base\Location;
 
 /**
  * @author fedotovaleksandr <mr.fedotovaleksandr@gmail.com>
  */
 class SnapToRoadRequest implements SnapToRoadRequestInterface
 {
-    /** @var array|Coordinate[] */
-    private $coordinates;
+    /** @var array|Location[] */
+    private $locations;
 
     /** @var boolean */
     private $interpolate;
@@ -18,29 +18,29 @@ class SnapToRoadRequest implements SnapToRoadRequestInterface
     /**
      * SnapToRoadRequest constructor.
      *
-     * @param array|Coordinate[] $coordinates
+     * @param array|Location[] $locations
      * @param bool $interpolate
      */
-    public function __construct($coordinates, $interpolate = false)
+    public function __construct($locations, $interpolate = false)
     {
-        $this->coordinates = $coordinates;
+        $this->locations = $locations;
         $this->interpolate = $interpolate;
     }
 
     /**
-     * @return array|Coordinate[]
+     * @return array|Location[]
      */
-    public function getCoordinates()
+    public function getLocations()
     {
-        return $this->coordinates;
+        return $this->locations;
     }
 
     /**
-     * @param array|Coordinate[] $coordinates
+     * @param array|Location[] $locations
      */
-    public function setCoordinates($coordinates): void
+    public function setLocations($locations): void
     {
-        $this->coordinates = $coordinates;
+        $this->locations = $locations;
     }
 
     /**
@@ -65,15 +65,15 @@ class SnapToRoadRequest implements SnapToRoadRequestInterface
     public function buildQuery()
     {
         $query['path'] = join('|', array_map(
-            function ($coordinate) {
-                /** @var Coordinate $coordinate */
+            function ($location) {
+                /** @var Location $location */
                 return sprintf(
                     '%s,%s',
-                    $coordinate->getLatitude(),
-                    $coordinate->getLongitude()
+                    $location->getLatitude(),
+                    $location->getLongitude()
                 );
             },
-            $this->coordinates
+            $this->locations
         ));
         $query['interpolate'] = $this->interpolate;
 
